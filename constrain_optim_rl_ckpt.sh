@@ -1,0 +1,15 @@
+CUDA_VISIBLE_DEVICES=0 python -u -W ignore constrain_optim_rl.py --path ./data_preprocessed/zinc_800 \
+    --co_rl --num_workers 2 \
+    --batch_size 64 --lr 0.0001 --epochs 1000 \
+    --shuffle --deq_coeff 0.9 --name rl_co_minact2_exp_iter400_rewardimp_logp1_125 \
+    --num_flow_layer 12 --nhid 128 --nout 128 --gcn_layer 3 \
+    --is_bn --divide_loss --st_type exp \
+    --init_checkpoint ./good_ckpt/checkpoint_co \
+    --min_atoms 10 --plogp_coeff 0.33333 --exp_temperature 3.0 --reward_decay 0.9 \
+    --reward_type imp \
+    --seed 666 --max_atoms 38 --moving_coeff 0.99 --rl_sample_temperature 0.75 \
+    --modify_size 5 --warm_up 24 --update_iters 4 \
+    --reinforce_iters 400 --not_save_demon --no_baseline \
+    --optimize_mols_ckpt \
+    --optim_start $1 --optim_end $2 --repeat_time $3 \
+    --optimized_save_path ./co_res
